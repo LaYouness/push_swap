@@ -6,7 +6,7 @@
 /*   By: ylaarare <ylaarare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:21:55 by ylaarare          #+#    #+#             */
-/*   Updated: 2025/02/05 09:56:59 by ylaarare         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:24:03 by ylaarare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	while (current->next)
 		current = current->next;
 	current->next = new;
-	new->prec = current;
+	new->prev = current;
 	new->next = NULL;
 }

@@ -45,7 +45,7 @@ int	ft_split_utils(char **words, char *str, int w_ind)
 	return (0);
 }
 
-char	**ft_split(char *str)
+char	**split(char *str)
 {
 	int w_ind;	
 	int status;

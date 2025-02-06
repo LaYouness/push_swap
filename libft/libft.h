@@ -6,7 +6,7 @@
 /*   By: ylaarare <ylaarare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 09:02:49 by younessla         #+#    #+#             */
-/*   Updated: 2025/02/05 09:54:21 by ylaarare         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:14:16 by ylaarare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 
 typedef struct s_list
 {
-	void			*content;
+	long			*content;
 	struct s_list	*next;
-	struct s_list	*prec;
+	struct s_list	*prev;
 }	t_list;
 
 size_t	ft_strlen(const char *str);
-int		ft_atoi(const char *nptr);
+long	ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_isalnum(int c);
