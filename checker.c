@@ -17,11 +17,15 @@ int is_digits(char *str)
 }
 int	check_dup(t_stack *stack, long number)
 {
-	while (stack)
+	if (!stack)
+		return (1);
+	t_stack	*current;
+	current = stack;
+	while (current)
 	{
-		if(stack->num == number)
+		if(current->num == number)
 			return(0);
-		stack = stack->next;
+		current = current->next;
 	}
 	return(1);
 }
