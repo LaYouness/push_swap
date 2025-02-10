@@ -6,25 +6,44 @@ int main(int ac, char **av)
 	int 	i;
 	char	**splited_arg;
 	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	if (ac <= 1)
 		return (-1);
-	stack_a = NULL;
-	i = 1;
-	/*creating stack*/
-	while (i < ac)
+	stack_a = create_stack(ac, av);
+	if (!stack_a)
+		return (printf("Error!\n"), 0);	
+	t_stack *cursor;
+	printf("stack a:\n");
+	cursor = stack_a;
+	while (cursor)
 	{
-		splited_arg = split(av[i]);
-		if(splited_arg[0] == 0)
-			return(printf("Error\n"), -1);
-		if(!add_to_stack(&stack_a, splited_arg))
-			return(free_stack(stack_a), free_splited_args(splited_arg), printf("Error\n"), -1);
-		free_splited_args(splited_arg);
-		i++;
+		printf("%ld\n", cursor->num);
+		cursor = cursor->next;
 	}
-	while (stack_a)
+	printf("swap a:\n");
+	swap(&stack_a);
+	cursor = stack_a;
+	while (cursor)
 	{
-		printf("%ld\n", stack_a->num);
-		stack_a = stack_a->next;
+		printf("%ld\n", cursor->num);
+		cursor = cursor->next;
 	}
+	printf("rotate a:\n");
+	rotate(&stack_a);
+	cursor = stack_a;
+	while (cursor)
+	{
+		printf("%ld\n", cursor->num);
+		cursor = cursor->next;
+	}
+	printf("rrotate a:\n");
+	rrotate(&stack_a);
+	cursor = stack_a;
+	while (cursor)
+	{
+		printf("%ld\n", cursor->num);
+		cursor = cursor->next;
+	}
+	free_stack(stack_a);
 }

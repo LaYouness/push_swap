@@ -13,7 +13,7 @@ void    free_stack(t_stack *stack)
 		current = hold_next;
 	}
 }
-void free_splited_args(char	**words)
+void free_splited_arg(char	**words)
 {
 	int i;
 
@@ -43,4 +43,25 @@ int	add_to_stack(t_stack **stack_a, char **splited_arg)
 		j++;
 	}
 	return(1);
+}
+
+t_stack	*create_stack(int ac, char **av)
+{
+	int 	i;
+	char	**splited_arg;
+	t_stack	*stack_a;
+
+	i = 1;
+	stack_a = NULL;
+	while (i < ac)
+	{
+		splited_arg = split(av[i]);
+		if(splited_arg[0] == 0)
+			return(free_splited_arg(splited_arg), NULL);
+		if(!add_to_stack(&stack_a, splited_arg))
+			return(free_stack(stack_a), free_splited_arg(splited_arg), NULL);
+		free_splited_arg(splited_arg);
+		i++;
+	}
+	return (stack_a);
 }

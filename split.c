@@ -6,6 +6,7 @@ int count_w(const char *str)
 	int status;
 	int cw;
 
+	cw = 0;
 	status = 0;
 	while (*str)
 	{
