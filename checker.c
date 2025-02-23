@@ -29,3 +29,16 @@ int	check_dup(t_stack *stack, long number)
 	}
 	return(1);
 }
+int	check_sorted(t_stack *stack)
+{
+	t_stack	*current;
+
+	current = stack;
+	while (current->next)
+	{
+		if(current->num > current->next->num)
+			return	(0);
+		current++;
+	}
+	return(1);
+}

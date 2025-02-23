@@ -9,6 +9,8 @@
 typedef struct			stack
 {
 		long			num;
+		int				index;
+		int				position;
 		struct stack	*next;
 		struct stack	*prev;
 } 						t_stack;
