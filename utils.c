@@ -1,5 +1,30 @@
 #include "push_swap.h"
+void	stack_indexig(t_stack *stack)
+{
+	int	i;
 
+	if(!stack)
+		return;
+	i = 0;
+	while (stack)
+	{
+		stack->index = i;
+		i++;
+		stack = stack->next;
+	}
+}
+int	size_stack(t_stack *stack)
+{
+	int	size;
+
+	size = 0;
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return(size);
+}
 void    free_stack(t_stack *stack)
 {
 	t_stack	*current;
@@ -63,5 +88,23 @@ t_stack	*create_stack(int ac, char **av)
 		free_splited_arg(splited_arg);
 		i++;
 	}
+	stack_indexig(stack_a);
 	return (stack_a);
+}
+void	a_to_b(t_stack **stack_a, t_stack **stack_b)
+{
+	int		half_size;
+	t_stack	*current;
+
+	half_size = size_stack(*stack_a) / 2;
+	current = *stack_a;
+	while (half_size--)
+	{
+		if(current->position <= half_size)
+			px(stack_a, stack_b, 'b');
+		else
+			rx(stack_a, 'a');
+	}
+	while (size_stack(*stack_a) > 3)
+		px(stack_a, stack_b, 'b');
 }
