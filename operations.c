@@ -16,7 +16,7 @@ void	ss(t_stack **stack_a, t_stack **stack_b)
 }
 void	px(t_stack **push_from, t_stack **push_to, char stack_name)
 {
-	push(push_to, push_from);
+	push(push_from, push_to);
 	stack_indexig(*push_from);
 	stack_indexig(*push_to);
 	printf("p%c\n", stack_name);

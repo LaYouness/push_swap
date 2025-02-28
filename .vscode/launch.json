@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/ylaarare/Desktop/push_swap",
-      "program": "/home/ylaarare/Desktop/push_swap/build/Debug/outDebug",
+      "cwd": "/home/younessla/push_swap",
+      "program": "/home/younessla/push_swap/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

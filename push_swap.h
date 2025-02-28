@@ -11,6 +11,9 @@ typedef struct			stack
 		long			num;
 		int				index;
 		int				position;
+		int				target;
+		int				cost_a;
+		int				cost_b;
 		struct stack	*next;
 		struct stack	*prev;
 } 						t_stack;
@@ -42,8 +45,11 @@ void	rr(t_stack **stack_a, t_stack **stack_b);
 void	rrx(t_stack **stack, char stack_name);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
 
+int		min_index(t_stack *stack);
+
 void    sort_3(t_stack **stack, char stack_name);
 void	stack_ranking(t_stack *stack);
 void	a_to_b(t_stack **stack_a, t_stack **stack_b);
+
 
 #endif

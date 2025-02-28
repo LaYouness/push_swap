@@ -94,17 +94,40 @@ t_stack	*create_stack(int ac, char **av)
 void	a_to_b(t_stack **stack_a, t_stack **stack_b)
 {
 	int		half_size;
+	int		i;
 	t_stack	*current;
 
 	half_size = size_stack(*stack_a) / 2;
-	current = *stack_a;
-	while (half_size--)
+	i = half_size;
+	while (i)
 	{
-		if(current->position <= half_size)
+		if((*stack_a)->position <= half_size)
 			px(stack_a, stack_b, 'b');
 		else
 			rx(stack_a, 'a');
+		--i;
 	}
 	while (size_stack(*stack_a) > 3)
 		px(stack_a, stack_b, 'b');
+}
+int	min_index(t_stack *stack)
+{
+	t_stack	*current;
+	int		rank;
+	
+	current = stack;
+	rank = current->position;
+	while (current)
+	{
+		if(current->position < rank)
+			rank = current->position;
+		current = current->next;
+	}
+	while (stack)
+	{
+		if (stack->position == rank)
+			return(stack->index);
+		stack = stack->next;
+	}
+	return(-1);
 }
