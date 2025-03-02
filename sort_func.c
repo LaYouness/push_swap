@@ -44,23 +44,32 @@ void	stack_ranking(t_stack *stack)
 		element = element->next;
 	}
 }
-int	element_target(t_stack *stack, t_stack *element)
+void	set_targets(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*current;
 	int		target_index;
+	int		target_value;
 
-
+	while (stack_b)
+	{
 	target_index = INT_MAX;
-	current = stack;
+	target_value = INT_MAX;
+	current = stack_a;
 	while (current)
 	{
-		if (current->num > element->num && current->num < target_index)
+		if (current->num > stack_b->num && current->num < target_value)
+		{
 			target_index = current->index;
+			target_value = current->num;
+		}
 		current = current->next;
 	}
 	if (target_index == INT_MAX)
-		return (min_index(stack));
-	return (target_index);
+		stack_b->target = min_index(stack_a);
+	else
+		stack_b->target = target_index;
+	stack_b = stack_b->next;
+	}
 }
 void	element_costs(t_stack *stack_a, t_stack *stack_b, t_stack *element)
 {
@@ -100,18 +109,27 @@ int	get_opti_elem(t_stack *stack)
 	}
 	return (opti_index);
 }
+void	para_rotate(t_stack **stack_a, t_stack **stack_b, t_stack *element)
+{
+	while (element->cost_a < 0 && element->cost_b < 0)
+	{
+		rrr(stack_a, stack_b);
+		element->cost_a++;
+		element->cost_b++;
+	}
+	while (element->cost_a > 0 && element->cost_b > 0)
+	{
+		rr(stack_a, stack_b);
+		element->cost_a--;
+		element->cost_b--;
+	}
+}
 void	b_to_a(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack *current;
 	int		opti_elem_index;
 
-	current = *stack_b;
-	while (current)
-	{
-		current->target = element_target(*stack_a, current);
-		element_costs(*stack_a, *stack_b, current);
-		current = current->next;
-	}
+	set_targets(stack_a, stack_b);
 	opti_elem_index = get_opti_elem(*stack_b);
 	current = *stack_b;
 	while (current)
@@ -120,18 +138,7 @@ void	b_to_a(t_stack **stack_a, t_stack **stack_b)
 			break;
 		current = current->next;		
 	}
-	while (current->cost_a < 0 && current->cost_b < 0)
-	{
-		rrr(stack_a, stack_b);
-		current->cost_a++;
-		current->cost_b++;
-	}
-	while (current->cost_a > 0 && current->cost_b > 0)
-	{
-		rr(stack_a, stack_b);
-		current->cost_a--;
-		current->cost_b--;
-	}
+	para_rotate(stack_a, stack_b, current);
 	while (current->cost_a)
 	{
 		if (current->cost_a > 0)
@@ -139,5 +146,11 @@ void	b_to_a(t_stack **stack_a, t_stack **stack_b)
 		else
 			rrx(stack_a, 'a');
 	}
-	
+	while (current->cost_b)
+	{
+		if (current->cost_b > 0)
+			rx(stack_b, 'b');
+		else
+			rrx(stack_b, 'b');
+	}
 }

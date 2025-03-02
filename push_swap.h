@@ -46,10 +46,11 @@ void	rx(t_stack **stack, char stack_name);
 void	rr(t_stack **stack_a, t_stack **stack_b);
 void	rrx(t_stack **stack, char stack_name);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
+void	para_rotate(t_stack **stack_a, t_stack **stack_b, t_stack *element);
 
 int		min_index(t_stack *stack);
-int		element_target(t_stack *stack, t_stack *element);
 void	element_costs(t_stack *stack_a, t_stack *stack_b, t_stack *element);
+void	set_targets(t_stack *stack_a, t_stack *stack_b);
 
 void    sort_3(t_stack **stack, char stack_name);
 void	stack_ranking(t_stack *stack);
