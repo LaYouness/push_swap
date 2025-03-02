@@ -14,10 +14,12 @@ typedef struct			stack
 		int				target;
 		int				cost_a;
 		int				cost_b;
+		int				cost;
 		struct stack	*next;
 		struct stack	*prev;
 } 						t_stack;
 
+int		absolute_value(int num);
 void	stack_indexig(t_stack *stack);
 int		size_stack(t_stack *stack);
 void    free_stack(t_stack *stack);
@@ -46,6 +48,8 @@ void	rrx(t_stack **stack, char stack_name);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
 
 int		min_index(t_stack *stack);
+int		element_target(t_stack *stack, t_stack *element);
+void	element_costs(t_stack *stack_a, t_stack *stack_b, t_stack *element);
 
 void    sort_3(t_stack **stack, char stack_name);
 void	stack_ranking(t_stack *stack);

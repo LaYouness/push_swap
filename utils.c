@@ -131,3 +131,10 @@ int	min_index(t_stack *stack)
 	}
 	return(-1);
 }
+int	absolute_value(int num)
+{
+    if (num < 0)
+        return -num;
+    else
+        return num;
+}

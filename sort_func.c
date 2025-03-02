@@ -62,45 +62,82 @@ int	element_target(t_stack *stack, t_stack *element)
 		return (min_index(stack));
 	return (target_index);
 }
-int	cost_a(t_stack *stack, t_stack *element)
+void	element_costs(t_stack *stack_a, t_stack *stack_b, t_stack *element)
 {
 	t_stack	*current;
-	int		target;
 
-	target = element->target;
-	if (target > size_stack(stack) / 2)
-		return(size_stack(stack) - target);
+	if (element->index > size_stack(stack_b) / 2)
+		element->cost_b = (size_stack(stack_b) - element->index) * -1;
 	else
-		return(target);
-}
-int	cost_b(t_stack *stack, t_stack *element)
-{
-	if(element->index > size_stack(stack) / 2)
-		return (size_stack(stack) - element->index);
+		element->cost_b = element->index;
+	if (element->target > size_stack(stack_a) / 2)
+		element->cost_a = (size_stack(stack_a) - element->target) * -1;
 	else
-		return (element->index);
+		element->cost_a = element->target;
+	if (current->cost_a * current->cost_b > 0)
+		current->cost = absolute_value(current->cost_a - current->cost_b);
+	else
+		current->cost = absolute_value(current->cost_a) + absolute_value(current->cost_b);
 }
-void	element_cost(t_stack *stack_a, t_stack *stack_b, t_stack *element)
+int	get_opti_elem(t_stack *stack)
 {
 	t_stack	*current;
-	int		target;
+	int		raw_cost;
+	int		opti_cost;
+	int		opti_index;
 
-	target = element->target;
-	if (target > size_stack(stack_a) / 2)
-		element->cost_a = size_stack(stack) - target);
-	else
-		return(target);
-}
-void	b_to_a(t_stack *stack_a, t_stack *stack_b)
-{
-	t_stack *current;
-
-	current = stack_b;
+	opti_cost = current->cost;
+	opti_index = 0;
+	current = stack;
 	while (current)
 	{
-		current->target = element_target(stack_a, current);
-		current->cost_a = cost_a(stack_a, current);
-		current->cost_b = 
+		if (current->cost < opti_cost)
+		{
+			opti_cost = current->cost;
+			opti_index = current->index;
+		}
+		current = current->next;
+	}
+	return (opti_index);
+}
+void	b_to_a(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack *current;
+	int		opti_elem_index;
+
+	current = *stack_b;
+	while (current)
+	{
+		current->target = element_target(*stack_a, current);
+		element_costs(*stack_a, *stack_b, current);
+		current = current->next;
+	}
+	opti_elem_index = get_opti_elem(*stack_b);
+	current = *stack_b;
+	while (current)
+	{
+		if (current->index == opti_elem_index)
+			break;
+		current = current->next;		
+	}
+	while (current->cost_a < 0 && current->cost_b < 0)
+	{
+		rrr(stack_a, stack_b);
+		current->cost_a++;
+		current->cost_b++;
+	}
+	while (current->cost_a > 0 && current->cost_b > 0)
+	{
+		rr(stack_a, stack_b);
+		current->cost_a--;
+		current->cost_b--;
+	}
+	while (current->cost_a)
+	{
+		if (current->cost_a > 0)
+			rx(stack_a, 'a');
+		else
+			rrx(stack_a, 'a');
 	}
 	
 }
