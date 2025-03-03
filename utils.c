@@ -89,6 +89,7 @@ t_stack	*create_stack(int ac, char **av)
 		i++;
 	}
 	stack_indexig(stack_a);
+	stack_ranking(stack_a);
 	return (stack_a);
 }
 void	a_to_b(t_stack **stack_a, t_stack **stack_b)
@@ -109,6 +110,8 @@ void	a_to_b(t_stack **stack_a, t_stack **stack_b)
 	}
 	while (size_stack(*stack_a) > 3)
 		px(stack_a, stack_b, 'b');
+	sort_3(stack_a, 'a');
+	print_stacks(*stack_a, *stack_b);
 }
 int	min_index(t_stack *stack)
 {
@@ -137,4 +140,23 @@ int	absolute_value(int num)
         return -num;
     else
         return num;
+}
+void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+{
+	t_stack	*current;
+
+	printf("stack A\n");
+	current = stack_a;
+	while (current)
+	{
+		printf("index: %d / value: %ld / target: %d / cost a: %d / cost b: %d / cost: %d\n", current->index, current->num, current->target, current->cost_a, current->cost_b, current->cost);
+		current = current->next;
+	}
+	printf("stack B\n");
+	current = stack_b;
+	while (current)
+	{
+		printf("index: %d / value: %ld / target: %d / cost a: %d / cost b: %d / cost: %d\n", current->index, current->num, current->target, current->cost_a, current->cost_b, current->cost);
+		current = current->next;
+	}
 }

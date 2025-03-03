@@ -71,22 +71,27 @@ void	set_targets(t_stack *stack_a, t_stack *stack_b)
 	stack_b = stack_b->next;
 	}
 }
-void	element_costs(t_stack *stack_a, t_stack *stack_b, t_stack *element)
+void	element_costs(t_stack *stack_a, t_stack *stack_b)
 {
-	t_stack	*current;
+	t_stack	*element;
 
-	if (element->index > size_stack(stack_b) / 2)
-		element->cost_b = (size_stack(stack_b) - element->index) * -1;
-	else
-		element->cost_b = element->index;
-	if (element->target > size_stack(stack_a) / 2)
-		element->cost_a = (size_stack(stack_a) - element->target) * -1;
-	else
-		element->cost_a = element->target;
-	if (current->cost_a * current->cost_b > 0)
-		current->cost = absolute_value(current->cost_a - current->cost_b);
-	else
-		current->cost = absolute_value(current->cost_a) + absolute_value(current->cost_b);
+	element = stack_b;
+	while (element)
+	{
+		if (element->index > size_stack(stack_b) / 2)
+			element->cost_b = (size_stack(stack_b) - element->index) * -1;
+		else
+			element->cost_b = element->index;
+		if (element->target > size_stack(stack_a) / 2)
+			element->cost_a = (size_stack(stack_a) - element->target) * -1;
+		else
+			element->cost_a = element->target;
+		if (element->cost_a * element->cost_b > 0)
+			element->cost = absolute_value(element->cost_a - element->cost_b);
+		else
+			element->cost = absolute_value(element->cost_a) + absolute_value(element->cost_b);
+		element = element->next;
+	}
 }
 int	get_opti_elem(t_stack *stack)
 {
@@ -95,7 +100,7 @@ int	get_opti_elem(t_stack *stack)
 	int		opti_cost;
 	int		opti_index;
 
-	opti_cost = current->cost;
+	opti_cost = INT_MAX;
 	opti_index = 0;
 	current = stack;
 	while (current)
@@ -109,7 +114,7 @@ int	get_opti_elem(t_stack *stack)
 	}
 	return (opti_index);
 }
-void	para_rotate(t_stack **stack_a, t_stack **stack_b, t_stack *element)
+void	para_rota(t_stack **stack_a, t_stack **stack_b, t_stack *element)
 {
 	while (element->cost_a < 0 && element->cost_b < 0)
 	{
@@ -124,33 +129,53 @@ void	para_rotate(t_stack **stack_a, t_stack **stack_b, t_stack *element)
 		element->cost_b--;
 	}
 }
+void	single_rota(t_stack **stack_a, t_stack **stack_b, t_stack *element)
+{
+	while (element->cost_a || element->cost_b)
+	{
+		if (element->cost_a > 0)
+		{
+			rx(stack_a, 'a');
+			element->cost_a--;
+		}
+		else if (element->cost_a < 0)
+		{
+			rrx(stack_a, 'a');
+			element->cost_a++;
+		}
+
+		if (element->cost_b > 0)
+		{
+			rx(stack_b, 'b');
+			element->cost_b--;
+		}
+		else if (element->cost_b < 0)
+		{
+			rrx(stack_b, 'b');
+			element->cost_b++;
+		}
+	}
+}
 void	b_to_a(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack *current;
 	int		opti_elem_index;
-
-	set_targets(stack_a, stack_b);
-	opti_elem_index = get_opti_elem(*stack_b);
-	current = *stack_b;
-	while (current)
+	while (size_stack(*stack_b))
 	{
-		if (current->index == opti_elem_index)
-			break;
-		current = current->next;		
+		set_targets(*stack_a, *stack_b);
+		element_costs(*stack_a, *stack_b);
+		opti_elem_index = get_opti_elem(*stack_b);
+		current = *stack_b;
+		while (current)
+		{
+			if (current->index == opti_elem_index)
+				break;
+			current = current->next;		
+		}
+		para_rota(stack_a, stack_b, current);
+		single_rota(stack_a, stack_b, current);
+		px(stack_b, stack_a, 'a');
 	}
-	para_rotate(stack_a, stack_b, current);
-	while (current->cost_a)
-	{
-		if (current->cost_a > 0)
-			rx(stack_a, 'a');
-		else
-			rrx(stack_a, 'a');
-	}
-	while (current->cost_b)
-	{
-		if (current->cost_b > 0)
-			rx(stack_b, 'b');
-		else
-			rrx(stack_b, 'b');
-	}
+	print_stacks(*stack_a, *stack_b);
+	stack_b = NULL;
 }

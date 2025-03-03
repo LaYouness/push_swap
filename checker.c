@@ -38,7 +38,7 @@ int	check_sorted(t_stack *stack)
 	{
 		if(current->num > current->next->num)
 			return	(0);
-		current++;
+		current = current->next;
 	}
 	return(1);
 }
