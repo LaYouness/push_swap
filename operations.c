@@ -33,7 +33,7 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 	rotate(stack_b);
 	stack_indexig(*stack_a);
 	stack_indexig(*stack_b);
-	printf("rr");
+	printf("rr\n");
 }
 void	rrx(t_stack **stack, char stack_name)
 {
@@ -47,5 +47,5 @@ void	rrr(t_stack **stack_a, t_stack **stack_b)
 	rrotate(stack_b);
 	stack_indexig(*stack_a);
 	stack_indexig(*stack_b);
-	printf("rrr");
+	printf("rrr\n");
 }
