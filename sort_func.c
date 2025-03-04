@@ -176,6 +176,26 @@ void	b_to_a(t_stack **stack_a, t_stack **stack_b)
 		single_rota(stack_a, stack_b, current);
 		px(stack_b, stack_a, 'a');
 	}
-	print_stacks(*stack_a, *stack_b);
 	stack_b = NULL;
+}
+void	final_rota(t_stack **stack, char stack_name)
+{
+	int		size;
+	int		min;
+	int		count;
+
+	min = min_index(*stack);
+	size = size_stack(*stack);
+	if (min < size / 2)
+	{
+		count = min;
+		while (count--)
+			rx(stack, stack_name);
+	}
+	else if (min > size / 2)
+	{
+		count = size - min;
+		while (count--)
+			rrx(stack, stack_name);
+	}
 }

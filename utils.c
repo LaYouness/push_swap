@@ -111,7 +111,6 @@ void	a_to_b(t_stack **stack_a, t_stack **stack_b)
 	while (size_stack(*stack_a) > 3)
 		px(stack_a, stack_b, 'b');
 	sort_3(stack_a, 'a');
-	print_stacks(*stack_a, *stack_b);
 }
 int	min_index(t_stack *stack)
 {

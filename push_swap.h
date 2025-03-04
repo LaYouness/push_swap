@@ -57,6 +57,7 @@ void    sort_3(t_stack **stack, char stack_name);
 void	stack_ranking(t_stack *stack);
 void	a_to_b(t_stack **stack_a, t_stack **stack_b);
 void	b_to_a(t_stack **stack_a, t_stack **stack_b);
+void	final_rota(t_stack **stack, char stack_name);
 
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
 
