@@ -89,9 +89,9 @@ void	element_costs(t_stack *stack_a, t_stack *stack_b)
 			element->cost_a = element->target;
 		raw_cost = absolute_value(element->cost_a) + absolute_value(element->cost_b);
 		if (element->cost_a * element->cost_b > 0)
-			element->cost = raw_cost - absolute_value(element->cost_a - element->cost_b);
-		else
 			element->cost = max_value(absolute_value(element->cost_a), absolute_value(element->cost_b));
+		else
+			element->cost = raw_cost;
 		element = element->next;
 	}
 }
