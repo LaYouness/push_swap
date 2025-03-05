@@ -74,6 +74,7 @@ void	set_targets(t_stack *stack_a, t_stack *stack_b)
 void	element_costs(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*element;
+	int		raw_cost;
 
 	element = stack_b;
 	while (element)
@@ -86,10 +87,11 @@ void	element_costs(t_stack *stack_a, t_stack *stack_b)
 			element->cost_a = (size_stack(stack_a) - element->target) * -1;
 		else
 			element->cost_a = element->target;
+		raw_cost = absolute_value(element->cost_a) + absolute_value(element->cost_b);
 		if (element->cost_a * element->cost_b > 0)
-			element->cost = absolute_value(element->cost_a - element->cost_b);
+			element->cost = raw_cost - absolute_value(element->cost_a - element->cost_b);
 		else
-			element->cost = absolute_value(element->cost_a) + absolute_value(element->cost_b);
+			element->cost = max_value(absolute_value(element->cost_a), absolute_value(element->cost_b));
 		element = element->next;
 	}
 }

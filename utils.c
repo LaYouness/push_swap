@@ -1,4 +1,6 @@
 #include "push_swap.h"
+#include "libft/libft.h"
+
 void	stack_indexig(t_stack *stack)
 {
 	int	i;
@@ -50,7 +52,7 @@ void free_splited_arg(char	**words)
 int	add_to_stack(t_stack **stack_a, char **splited_arg)
 {
 	int		j;
-	int		number;
+	long	number;
 	t_stack	*new_elem;
 
 	j = 0;
@@ -58,8 +60,8 @@ int	add_to_stack(t_stack **stack_a, char **splited_arg)
 	{
 		if(is_digits(splited_arg[j]) == 0)
 			return(0);
-		number = atoi(splited_arg[j]);
-		if(number > INT_MAX || number < INT_MIN || !check_dup(*stack_a, number))
+		number = ft_atoi(splited_arg[j]);
+		if(number > 2147483647 || number < -2147483648 || !check_dup(*stack_a, number))
 			return(0);
 		new_elem = lstnew(number);
 		if(!new_elem)
@@ -82,7 +84,7 @@ t_stack	*create_stack(int ac, char **av)
 	{
 		splited_arg = split(av[i]);
 		if(splited_arg[0] == 0)
-			return(free_splited_arg(splited_arg), NULL);
+			return(free_splited_arg(splited_arg), free_stack(stack_a), NULL);
 		if(!add_to_stack(&stack_a, splited_arg))
 			return(free_stack(stack_a), free_splited_arg(splited_arg), NULL);
 		free_splited_arg(splited_arg);
@@ -136,9 +138,16 @@ int	min_index(t_stack *stack)
 int	absolute_value(int num)
 {
     if (num < 0)
-        return -num;
+        return (-num);
     else
-        return num;
+        return (num);
+}
+int	max_value(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	else
+		return (b);
 }
 void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 {

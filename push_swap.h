@@ -20,6 +20,7 @@ typedef struct			stack
 } 						t_stack;
 
 int		absolute_value(int num);
+int	max_value(int a, int b);
 
 void	stack_indexig(t_stack *stack);
 void	stack_ranking(t_stack *stack);

@@ -16,11 +16,10 @@ int main(int ac, char **av)
 	if (!stack_a)
 		return (printf("Error!\n"), 0);
 	if (check_sorted(stack_a))
-		return(0);
+		return(free_stack(stack_a), 0);
 	
 
 	a_to_b(&stack_a, &stack_b);
-	
 
 	b_to_a(&stack_a, &stack_b);
 
