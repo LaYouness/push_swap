@@ -20,7 +20,9 @@ typedef struct			stack
 } 						t_stack;
 
 int		absolute_value(int num);
+
 void	stack_indexig(t_stack *stack);
+void	stack_ranking(t_stack *stack);
 int		size_stack(t_stack *stack);
 void    free_stack(t_stack *stack);
 t_stack	*lstnew(long number);
@@ -54,7 +56,6 @@ void	element_costs(t_stack *stack_a, t_stack *stack_b);
 void	set_targets(t_stack *stack_a, t_stack *stack_b);
 
 void    sort_3(t_stack **stack, char stack_name);
-void	stack_ranking(t_stack *stack);
 void	a_to_b(t_stack **stack_a, t_stack **stack_b);
 void	b_to_a(t_stack **stack_a, t_stack **stack_b);
 void	final_rota(t_stack **stack, char stack_name);
