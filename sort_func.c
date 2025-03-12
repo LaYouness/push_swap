@@ -7,6 +7,8 @@ void    sort_3(t_stack **stack, char stack_name)
 
 	max = *stack; 
 	current = *stack;
+	if (size_stack(*stack) == 2)
+		return (sx(stack, stack_name));
 	while (current)
 	{
 		if(current->num > max->num)

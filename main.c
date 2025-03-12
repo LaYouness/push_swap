@@ -14,19 +14,17 @@ int main(int ac, char **av)
 		return (0);
 	stack_a = create_stack(ac, av);
 	if (!stack_a)
-		return (printf("Error!\n"), 0);
+		return (write(2, "Error!\n", 6), 0);
 	if (check_sorted(stack_a))
 		return(free_stack(stack_a), 0);
-	
-
-	a_to_b(&stack_a, &stack_b);
-
-	b_to_a(&stack_a, &stack_b);
-
-
-	if (!check_sorted(stack_a))
+	if (size_stack(stack_a) <= 3)
 	{
-		final_rota(&stack_a, 'a');
+		sort_3(&stack_a, 'a');
+		return (0);
 	}
+	a_to_b(&stack_a, &stack_b);
+	b_to_a(&stack_a, &stack_b);
+	if (!check_sorted(stack_a))
+		final_rota(&stack_a, 'a');
 	free_stack(stack_a);
 }

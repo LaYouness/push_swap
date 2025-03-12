@@ -105,10 +105,12 @@ void	a_to_b(t_stack **stack_a, t_stack **stack_b)
 	while (i)
 	{
 		if((*stack_a)->position <= half_size)
-			px(stack_a, stack_b, 'b');
+		{
+		px(stack_a, stack_b, 'b');
+		--i;
+		}
 		else
 			rx(stack_a, 'a');
-		--i;
 	}
 	while (size_stack(*stack_a) > 3)
 		px(stack_a, stack_b, 'b');
