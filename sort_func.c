@@ -189,7 +189,7 @@ void	final_rota(t_stack **stack, char stack_name)
 
 	min = min_index(*stack);
 	size = size_stack(*stack);
-	if (min < size / 2)
+	if (min <= size / 2)
 	{
 		count = min;
 		while (count--)
