@@ -2,12 +2,8 @@
 #include "libft/libft.h"
 
 int main(int ac, char **av)
-{
-	int 	i;
-	char	**splited_arg;
-	t_stack	*stack_a;
+{	t_stack	*stack_a;
 	t_stack	*stack_b;
-	t_stack	*current;
 
 	stack_b = NULL;
 	if (ac <= 1)

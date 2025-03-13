@@ -100,12 +100,11 @@ void	element_costs(t_stack *stack_a, t_stack *stack_b)
 int	get_opti_elem(t_stack *stack)
 {
 	t_stack	*current;
-	int		raw_cost;
 	int		opti_cost;
 	int		opti_index;
 
 	opti_cost = INT_MAX;
-	opti_index = 0;
+	opti_index = INT_MAX;
 	current = stack;
 	while (current)
 	{

@@ -28,7 +28,6 @@ void	free_all(char **words, int w_ind)
 }
 int	create_word(char **words, char *str, int w_ind)
 {
-	int cw;
 	int wl;
 	int i;
 

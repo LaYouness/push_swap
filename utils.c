@@ -98,7 +98,6 @@ void	a_to_b(t_stack **stack_a, t_stack **stack_b)
 {
 	int		half_size;
 	int		i;
-	t_stack	*current;
 
 	half_size = size_stack(*stack_a) / 2;
 	i = half_size;
